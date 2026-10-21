@@ -1,0 +1,99 @@
+{
+  "@@locale": "en",
+  "appName": "My Fishing App",
+  "@appName": {
+    "description": "Application name shown in the interface"
+  },
+  "welcomeBack": "Welcome Back",
+  "@welcomeBack": {
+    "description": "Login screen heading"
+  },
+  "welcomeSubtitle": "Your next fishing adventure starts here.",
+  "@welcomeSubtitle": {
+    "description": "Login screen subtitle"
+  },
+  "login": "Login",
+  "@login": {
+    "description": "Login action"
+  },
+  "home": "Home",
+  "@home": {
+    "description": "Home tab label"
+  },
+  "explore": "Explore",
+  "@explore": {
+    "description": "Explore tab label"
+  },
+  "notification": "Notification",
+  "@notification": {
+    "description": "Notification tab label"
+  },
+  "settings": "Settings",
+  "@settings": {
+    "description": "Settings tab label"
+  },
+  "language": "Language",
+  "@language": {
+    "description": "Language settings section title"
+  },
+  "bahasaMelayu": "Bahasa Melayu",
+  "@bahasaMelayu": {
+    "description": "Native name of the Malay language option"
+  },
+  "english": "English",
+  "@english": {
+    "description": "Native name of the English language option"
+  },
+  "email": "Email",
+  "@email": {
+    "description": "Email field hint"
+  },
+  "password": "Password",
+  "@password": {
+    "description": "Password field hint"
+  },
+  "showPassword": "Show password",
+  "@showPassword": {
+    "description": "Tooltip for revealing a password"
+  },
+  "hidePassword": "Hide password",
+  "@hidePassword": {
+    "description": "Tooltip for hiding a password"
+  },
+  "newUser": "New?",
+  "@newUser": {
+    "description": "Prompt shown before the register link"
+  },
+  "register": "Register",
+  "@register": {
+    "description": "Link to the create-account screen"
+  },
+  "createAccount": "Create account",
+  "@createAccount": {
+    "description": "Create-account heading and button"
+  },
+  "createAccountSubtitle": "Register to start your next fishing adventure.",
+  "@createAccountSubtitle": {
+    "description": "Create-account screen subtitle"
+  },
+  "name": "Name",
+  "@name": {
+    "description": "Name field hint"
+  },
+  "alreadyHaveAccount": "Already have an account?",
+  "@alreadyHaveAccount": {
+    "description": "Prompt shown before the link back to login"
+  },
+  "fishingHook": "Fishing hook",
+  "@fishingHook": {
+    "description": "Screen-reader label for the fishing hook mark"
+  },
+  "splashScene": "Angler fighting a jumping fish at night",
+  "@splashScene": {
+    "description": "Screen-reader label for the splash and login artwork"
+  },
+  "homeHeaderScene": "Angler and a jumping fish",
+  "@homeHeaderScene": {
+    "description": "Screen-reader label for the home header artwork"
+  }
+}
