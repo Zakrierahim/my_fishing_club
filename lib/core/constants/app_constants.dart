@@ -3,6 +3,7 @@ class AppConstants {
   const AppConstants._();
 
   static const Duration splashDuration = Duration(milliseconds: 1500);
+  static const String appVersion = '1.0.0';
 
   static const double contentMaxWidth = 840;
   static const double formMaxWidth = 440;

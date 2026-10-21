@@ -95,5 +95,323 @@
   "homeHeaderScene": "Angler and a jumping fish",
   "@homeHeaderScene": {
     "description": "Screen-reader label for the home header artwork"
-  }
+  },
+  "continueWithGoogle": "Continue with Google",
+  "@continueWithGoogle": {
+    "description": "Google sign-in button"
+  },
+  "continueWithFacebook": "Continue with Facebook",
+  "@continueWithFacebook": {
+    "description": "Facebook sign-in button"
+  },
+  "continueWithTikTok": "Continue with TikTok",
+  "@continueWithTikTok": {
+    "description": "TikTok sign-in button"
+  },
+  "continueWithWhatsApp": "Continue with WhatsApp",
+  "@continueWithWhatsApp": {
+    "description": "WhatsApp phone verification button"
+  },
+  "linkedAccounts": "Linked Accounts",
+  "@linkedAccounts": {
+    "description": "Settings section for provider links"
+  },
+  "connected": "Connected",
+  "@connected": {
+    "description": "Provider link confirmed by the authentication service"
+  },
+  "notConnected": "Not connected",
+  "@notConnected": {
+    "description": "Provider is not linked"
+  },
+  "linkAccount": "Link Account",
+  "@linkAccount": {
+    "description": "Action that asks the service to link a provider"
+  },
+  "unlinkAccount": "Unlink Account",
+  "@unlinkAccount": {
+    "description": "Action that asks the service to remove a provider link"
+  },
+  "authenticationFailed": "Authentication failed",
+  "@authenticationFailed": {
+    "description": "Shown when sign-in or linking fails"
+  },
+  "authenticationCancelled": "Authentication cancelled",
+  "@authenticationCancelled": {
+    "description": "Shown when the user cancels provider sign-in"
+  },
+  "verificationCode": "Verification code",
+  "@verificationCode": {
+    "description": "Hint for a one-time verification code"
+  },
+  "resendCode": "Resend code",
+  "@resendCode": {
+    "description": "Asks the verification service to send another code"
+  },
+  "confirmUnlink": "Confirm unlinking",
+  "@confirmUnlink": {
+    "description": "Title of the unlink confirmation dialog"
+  },
+  "confirmUnlinkMessage": "Unlink {provider}? You will not be able to sign in with it.",
+  "@confirmUnlinkMessage": {
+    "description": "Body of the unlink confirmation dialog",
+    "placeholders": {
+      "provider": {
+        "type": "String",
+        "example": "Google"
+      }
+    }
+  },
+  "configurationRequired": "Configuration required",
+  "@configurationRequired": {
+    "description": "Shown when provider credentials or the session backend are missing"
+  },
+  "unlinkLastMethod": "Keep at least one sign-in method linked.",
+  "@unlinkLastMethod": {
+    "description": "Shown when unlinking would remove the only sign-in method"
+  },
+  "cancel": "Cancel",
+  "@cancel": {
+    "description": "Dismisses a confirmation dialog"
+  },
+  "phoneNumber": "Phone number",
+  "@phoneNumber": {
+    "description": "Hint for the WhatsApp phone number field"
+  },
+  "whatsappVerificationTitle": "Verify WhatsApp",
+  "@whatsappVerificationTitle": {
+    "description": "Heading on the WhatsApp verification screen"
+  },
+  "whatsappVerificationSubtitle": "Enter your phone number. A code is sent only after WhatsApp verification is configured.",
+  "@whatsappVerificationSubtitle": {
+    "description": "Explains that WhatsApp codes are not sent by the app itself"
+  },
+  "verify": "Verify",
+  "@verify": {
+    "description": "Submits a verification code to the authentication service"
+  },
+  "goodMorning": "Good morning",
+  "@goodMorning": {
+    "description": "Home greeting before noon"
+  },
+  "goodAfternoon": "Good afternoon",
+  "@goodAfternoon": {
+    "description": "Home greeting from noon until evening"
+  },
+  "goodEvening": "Good evening",
+  "@goodEvening": {
+    "description": "Home greeting in the evening"
+  },
+  "homePrompt": "Your next trip starts here.",
+  "@homePrompt": {
+    "description": "Line under the home greeting"
+  },
+  "logACatch": "Log a catch",
+  "@logACatch": {
+    "description": "Primary home action"
+  },
+  "spots": "Spots",
+  "@spots": {
+    "description": "Shortcut to fishing places"
+  },
+  "spotsSubtitle": "Browse places to fish",
+  "@spotsSubtitle": {
+    "description": "Subtitle on the spots shortcut"
+  },
+  "trips": "Trips",
+  "@trips": {
+    "description": "Shortcut for planned fishing trips"
+  },
+  "tripsSubtitle": "Plan your next outing",
+  "@tripsSubtitle": {
+    "description": "Subtitle on the trips shortcut"
+  },
+  "recentActivity": "Recent activity",
+  "@recentActivity": {
+    "description": "Home section for the latest catches"
+  },
+  "noCatchesYet": "No catches yet.",
+  "@noCatchesYet": {
+    "description": "Empty state when the angler has not logged a catch"
+  },
+  "membershipSection": "Membership",
+  "noMembershipYet": "No membership yet.",
+  "myFishingPass": "My Fishing Pass",
+  "passCardSubtitle": "Open your pond pass when you have a membership.",
+  "explorePonds": "Explore Ponds",
+  "myMemberships": "My Memberships",
+  "myTrips": "My Trips",
+  "quickActions": "Quick actions",
+  "searchPonds": "Search ponds",
+  "fishSpecies": "Fish species",
+  "pondType": "Pond type",
+  "noPondsYet": "No ponds to show yet.",
+  "noMatchingPonds": "No ponds match your search.",
+  "noFiltersYet": "Filters appear when ponds are available.",
+  "clearFilters": "Clear filters",
+  "pondDetails": "Pond details",
+  "speciesLabel": "Species",
+  "noMembershipAtPond": "No membership at this pond.",
+  "membershipsEmptyBody": "When you join a pond, it will appear here. Each pond has its own membership.",
+  "membershipDetails": "Membership details",
+  "demoPreview": "Demo preview",
+  "notVerifiedMembership": "This is not a verified membership.",
+  "demoData": "Demo data",
+  "demoDataHint": "Shows a local preview of publicly listed venues. This is not live data.",
+  "demoPond": "Demo pond",
+  "previewData": "Preview data",
+  "notConfirmed": "Not confirmed",
+  "saltwater": "Saltwater",
+  "freshwater": "Freshwater",
+  "mixedWater": "Saltwater and freshwater",
+  "unknownWater": "Unknown",
+  "waterType": "Water type",
+  "openInGoogleMaps": "Open in Google Maps",
+  "searchInGoogleMaps": "Search in Google Maps",
+  "coordinatesLabel": "Coordinates",
+  "imageUnavailable": "Image unavailable",
+  "price": "Price",
+  "openingHours": "Opening hours",
+  "samplePrice": "Sample price",
+  "sampleOpeningHours": "Sample opening hours",
+  "facilities": "Facilities",
+  "areaLabel": "Area",
+  "verifiedMembership": "Verified membership",
+  "passEmptyTitle": "No fishing pass yet",
+  "passEmptyBody": "A pass appears here after you have a membership at a pond.",
+  "qrUnavailable": "No QR code is shown in this version.",
+  "demoPassBody": "This preview is not a membership credential.",
+  "demoPreviewBadge": "DEMO PREVIEW",
+  "demoQrCode": "Demo QR code",
+  "demoBarcode": "Demo barcode",
+  "memberId": "Member ID",
+  "demoPassOnly": "Demo pass only. Not valid for entry or check-in.",
+  "membershipNotVerified": "Membership is not verified.",
+  "checkInUnavailable": "Check-in is not available.",
+  "profile": "Profile",
+  "editProfile": "Edit profile",
+  "nameNotSet": "Name not set",
+  "unavailable": "Unavailable",
+  "displayName": "Display name",
+  "savedOnDeviceOnly": "Saved on this device only.",
+  "save": "Save",
+  "preferences": "Preferences",
+  "about": "About",
+  "versionLabel": "Version {version}",
+  "@versionLabel": {
+    "placeholders": {
+      "version": {
+        "type": "String",
+        "example": "1.0.0"
+      }
+    }
+  },
+  "noNotificationsYet": "No notifications yet",
+  "noNotificationsBody": "When something needs your attention, it will show up here.",
+  "screenNotReady": "This screen is not ready yet. Nothing is saved.",
+  "viewMap": "View map",
+  "navigate": "Navigate",
+  "chooseNavigation": "Choose a maps app",
+  "navigationSuggested": "Suggested",
+  "googleMaps": "Google Maps",
+  "waze": "Waze",
+  "appleMaps": "Apple Maps",
+  "navigationSearchNote": "This searches by the pond name and address. It is not a verified pin.",
+  "mapsLaunchFailed": "Couldn't open maps.",
+  "mapsOpenedInBrowser": "Opened a map page in the browser. Navigation did not start in an app.",
+  "favorites": "Favorites",
+  "noFavoritesYet": "No favorite ponds yet.",
+  "favoritePond": "Add to favorites",
+  "unfavoritePond": "Remove from favorites",
+  "pondUnavailable": "This pond is not in the current list.",
+  "sortByName": "Name (A–Z)",
+  "catchLog": "Catch log",
+  "addCatch": "Add catch",
+  "editCatch": "Edit catch",
+  "catchDetails": "Catch details",
+  "speciesRequired": "Enter a species name.",
+  "catchDate": "Catch date",
+  "catchTime": "Catch time",
+  "weightKg": "Weight (kg, optional)",
+  "lengthCm": "Length (cm, optional)",
+  "notesOptional": "Notes (optional)",
+  "associatedPond": "Pond (optional)",
+  "noPondSelected": "No pond",
+  "invalidNumber": "Enter a number that is zero or greater.",
+  "addPhoto": "Add photo",
+  "removePhoto": "Remove photo",
+  "photoSelected": "A photo is attached.",
+  "photoUnavailable": "The photo could not be saved.",
+  "couldNotSave": "Couldn't save. Nothing was changed.",
+  "delete": "Delete",
+  "cancel": "Cancel",
+  "deleteConfirmTitle": "Delete this record?",
+  "deleteConfirmBody": "This removes it from this device.",
+  "planATrip": "Plan a trip",
+  "editTrip": "Edit trip",
+  "tripDetails": "Trip details",
+  "tripTitleLabel": "Trip title",
+  "tripTitleRequired": "Enter a trip title.",
+  "startDate": "Start date",
+  "endDate": "End date (optional)",
+  "clearEndDate": "Clear end date",
+  "endBeforeStart": "The end date is before the start date.",
+  "tripStatusPlanned": "Planned",
+  "tripStatusCompleted": "Completed",
+  "tripStatusCancelled": "Cancelled",
+  "markCompleted": "Mark completed",
+  "cancelTrip": "Cancel trip",
+  "reopenTrip": "Mark as planned",
+  "notAReservation": "This does not reserve or book the pond.",
+  "noTripsYet": "No trips yet.",
+  "selectPond": "Pond",
+  "noPondsForTrip": "No ponds are available to select.",
+  "loadingRecords": "Loading saved records…",
+  "recordsLoadFailed": "Saved records could not be loaded.",
+  "recordMissing": "This record is no longer on this device.",
+  "fishingSession": "Fishing session",
+  "fishingHistory": "Fishing history",
+  "startSession": "Start session",
+  "resumeSession": "Resume session",
+  "sessionActive": "Active",
+  "sessionCompleted": "Completed",
+  "sessionInProgress": "A session is already in progress.",
+  "sessionStartedAt": "Started",
+  "sessionEndedAt": "Ended",
+  "sessionElapsed": "Elapsed",
+  "sessionDurationHours": "{hours} h {minutes} min",
+  "@sessionDurationHours": {
+    "placeholders": {
+      "hours": {"type": "int"},
+      "minutes": {"type": "int"}
+    }
+  },
+  "sessionDurationMinutes": "{minutes} min",
+  "@sessionDurationMinutes": {
+    "placeholders": {
+      "minutes": {"type": "int"}
+    }
+  },
+  "sessionCatchCount": "Catches: {count}",
+  "@sessionCatchCount": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "endSession": "End session",
+  "endSessionConfirmTitle": "End this session?",
+  "endSessionConfirmBody": "The end time is recorded. New catches cannot be added from this session.",
+  "sessionTitleLabel": "Session title (optional)",
+  "noSessionsYet": "No fishing sessions yet.",
+  "sessionNotABooking": "Saved on this device. This is not a booking.",
+  "addCatchToSession": "Add catch",
+  "sessionPond": "Pond",
+  "noPondOnSession": "No pond selected",
+  "markLinkedTripCompleted": "Mark linked trip completed",
+  "linkedTripMissing": "The linked trip is no longer on this device.",
+  "sessionSummary": "Session summary",
+  "activeSessionSection": "Active session",
+  "completedSessionsSection": "Completed",
+  "sessionCatchLinked": "This catch is part of the fishing session.",
+  "sessionEndMissing": "End time was not recorded."
 }
