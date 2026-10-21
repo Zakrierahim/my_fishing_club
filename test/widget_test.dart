@@ -8,12 +8,21 @@ import 'package:my_fishing_club/core/constants/app_constants.dart';
 import 'package:my_fishing_club/core/constants/app_tab.dart';
 import 'package:my_fishing_club/core/theme/app_colors.dart';
 import 'package:my_fishing_club/generated/l10n/app_localizations.dart';
+import 'package:my_fishing_club/models/auth_outcome.dart';
+import 'package:my_fishing_club/models/auth_provider_id.dart';
+import 'package:my_fishing_club/models/linked_account.dart';
 import 'package:my_fishing_club/views/home/home_screen.dart';
 import 'package:my_fishing_club/views/login/login_screen.dart';
+import 'package:my_fishing_club/views/login/whatsapp_verification_screen.dart';
 import 'package:my_fishing_club/views/register/register_screen.dart';
+import 'package:my_fishing_club/views/settings/linked_accounts_section.dart';
 import 'package:my_fishing_club/views/settings/settings_screen.dart';
 import 'package:my_fishing_club/views/splash/splash_screen.dart';
+import 'package:my_fishing_club/widgets/social_sign_in_button.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'support/fake_auth_gateway.dart';
+import 'support/tap_clear_of_nav.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -61,6 +70,10 @@ void main() {
     expect(find.widgetWithText(TextButton, en.register), findsOneWidget);
     expect(find.byKey(SplashScreen.backgroundKey), findsNothing);
     expect(find.byKey(LoginScreen.backgroundKey), findsOneWidget);
+    expect(find.text(en.continueWithGoogle), findsOneWidget);
+    expect(find.text(en.continueWithFacebook), findsOneWidget);
+    expect(find.text(en.continueWithTikTok), findsOneWidget);
+    expect(find.text(en.continueWithWhatsApp), findsOneWidget);
     expect(find.byType(TextField), findsNWidgets(2));
 
     await tester.enterText(
@@ -146,6 +159,34 @@ void main() {
       find.byKey(const ValueKey<String>('page-heading-Home')),
       findsOneWidget,
     );
+  });
+
+  testWidgets('home dashboard lists the next actions and spots opens explore', (
+    tester,
+  ) async {
+    await openMain(tester);
+
+    expect(find.text(homeGreeting(en, DateTime.now().hour)), findsOneWidget);
+    expect(find.text(en.homePrompt), findsOneWidget);
+    expect(find.text(en.noMembershipYet), findsOneWidget);
+    expect(find.text(en.myFishingPass), findsOneWidget);
+    expect(find.text(en.logACatch), findsOneWidget);
+    expect(find.text(en.explorePonds), findsOneWidget);
+    expect(find.text(en.myMemberships), findsOneWidget);
+    expect(find.text(en.myTrips), findsOneWidget);
+    expect(find.text(en.noCatchesYet), findsOneWidget);
+    expect(find.text(en.verifiedMembership), findsNothing);
+
+    final logCatch = find.byKey(HomeScreen.logCatchKey);
+    expect(tester.getSize(logCatch).height, greaterThanOrEqualTo(48));
+
+    await tapClearOfNav(tester, find.byKey(HomeScreen.explorePondsKey));
+
+    expect(
+      find.byKey(const ValueKey<String>('page-heading-Explore')),
+      findsOneWidget,
+    );
+    expect(find.text(en.noPondsYet), findsOneWidget);
   });
 
   testWidgets('a second login tap does not stack another main screen', (
@@ -273,6 +314,8 @@ void main() {
     expect(find.text(ms.bahasaMelayu), findsOneWidget);
     expect(find.text(ms.english), findsOneWidget);
     expect(find.text(ms.home), findsOneWidget);
+    expect(find.text(ms.linkedAccounts), findsOneWidget);
+    expect(find.text(ms.notConnected), findsNWidgets(4));
     expect(find.text(en.settings), findsNothing);
     expect(find.text(en.welcomeBack), findsNothing);
 
@@ -283,5 +326,188 @@ void main() {
     await tester.pumpWidget(FishingApp(localeController: restored));
     expect(find.text(ms.appName), findsOneWidget);
     expect(find.text(en.appName), findsNothing);
+  });
+
+  testWidgets('social sign-in stays on login when it is not configured', (
+    tester,
+  ) async {
+    await openLogin(tester);
+    final google = find.byKey(SocialSignInButton.keyFor(AuthProviderId.google));
+    await tester.ensureVisible(google);
+    expect(tester.getSize(google).height, greaterThanOrEqualTo(48));
+
+    await tester.tap(google);
+    await tester.pumpAndSettle();
+
+    expect(find.text(en.configurationRequired), findsOneWidget);
+    expect(find.text(en.welcomeBack), findsOneWidget);
+    expect(
+      find.byKey(const ValueKey<String>('page-heading-Home')),
+      findsNothing,
+    );
+  });
+
+  testWidgets('settings link does not mark a provider connected', (
+    tester,
+  ) async {
+    await openMain(tester);
+    await tester.tap(find.byIcon(Icons.settings_rounded));
+    await tester.pumpAndSettle();
+
+    expect(find.text(en.linkedAccounts), findsOneWidget);
+    expect(find.text(en.notConnected), findsNWidgets(4));
+    expect(find.text(en.connected), findsNothing);
+
+    final linkGoogle = find.byKey(
+      LinkedAccountsSection.actionKey(AuthProviderId.google),
+    );
+    await tester.ensureVisible(linkGoogle);
+    await tester.tap(linkGoogle);
+    await tester.pumpAndSettle();
+
+    expect(find.text(en.configurationRequired), findsOneWidget);
+    expect(find.text(en.connected), findsNothing);
+    expect(
+      find.byKey(LinkedAccountsSection.statusKey(AuthProviderId.google)),
+      findsOneWidget,
+    );
+    expect(find.text(en.notConnected), findsNWidgets(4));
+  });
+
+  testWidgets('cancelled sign-in does not open the app', (tester) async {
+    final gateway = FakeAuthGateway(
+      signInResult: const AuthOutcome.cancelled(),
+    );
+    await tester.pumpWidget(const SizedBox.shrink());
+    await tester.pumpWidget(FishingApp(authGateway: gateway));
+    await tester.pump(AppConstants.splashDuration);
+    await tester.pumpAndSettle();
+
+    final facebook = find.byKey(
+      SocialSignInButton.keyFor(AuthProviderId.facebook),
+    );
+    await tester.ensureVisible(facebook);
+    final button = tester.widget<OutlinedButton>(facebook);
+    button.onPressed!.call();
+    button.onPressed!.call();
+    await tester.pumpAndSettle();
+
+    expect(gateway.signInCalls, 1);
+    expect(find.text(en.authenticationCancelled), findsOneWidget);
+    expect(find.text(en.welcomeBack), findsOneWidget);
+  });
+
+  testWidgets('a confirmed session shows only service-linked accounts', (
+    tester,
+  ) async {
+    final gateway = FakeAuthGateway(
+      signInResult: const AuthOutcome.session('user-1'),
+      unlinkResult: const AuthOutcome.unlinked(),
+      linkedAccounts: [
+        const LinkedAccount(
+          provider: AuthProviderId.google,
+          confirmedByService: true,
+          providerSubject: 'google-subject',
+        ),
+        const LinkedAccount(
+          provider: AuthProviderId.facebook,
+          confirmedByService: true,
+          providerSubject: 'facebook-subject',
+        ),
+      ],
+    );
+    await tester.pumpWidget(const SizedBox.shrink());
+    await tester.pumpWidget(FishingApp(authGateway: gateway));
+    await tester.pump(AppConstants.splashDuration);
+    await tester.pumpAndSettle();
+
+    await tester.ensureVisible(
+      find.byKey(SocialSignInButton.keyFor(AuthProviderId.google)),
+    );
+    await tester.tap(
+      find.byKey(SocialSignInButton.keyFor(AuthProviderId.google)),
+    );
+    await tester.pumpAndSettle();
+
+    expect(
+      find.byKey(const ValueKey<String>('page-heading-Home')),
+      findsOneWidget,
+    );
+
+    await tester.tap(find.byIcon(Icons.settings_rounded));
+    await tester.pumpAndSettle();
+    expect(find.text(en.connected), findsNWidgets(2));
+    expect(find.text(en.notConnected), findsNWidgets(2));
+
+    final unlinkFacebook = find.byKey(
+      LinkedAccountsSection.actionKey(AuthProviderId.facebook),
+    );
+    await tester.ensureVisible(unlinkFacebook);
+    await tester.tap(unlinkFacebook);
+    await tester.pumpAndSettle();
+    expect(find.text(en.confirmUnlink), findsOneWidget);
+
+    await tester.tap(find.byKey(LinkedAccountsSection.cancelKey));
+    await tester.pumpAndSettle();
+    expect(find.text(en.connected), findsNWidgets(2));
+    expect(gateway.unlinkCalls, 0);
+
+    await tester.tap(unlinkFacebook);
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(LinkedAccountsSection.confirmKey));
+    await tester.pumpAndSettle();
+    expect(find.text(en.connected), findsOneWidget);
+    expect(gateway.unlinkCalls, 1);
+
+    final unlinkGoogle = find.byKey(
+      LinkedAccountsSection.actionKey(AuthProviderId.google),
+    );
+    await tester.ensureVisible(unlinkGoogle);
+    await tester.tap(unlinkGoogle);
+    await tester.pumpAndSettle();
+
+    expect(find.text(en.unlinkLastMethod), findsOneWidget);
+    expect(find.text(en.confirmUnlink), findsNothing);
+    expect(find.text(en.connected), findsOneWidget);
+    expect(gateway.unlinkCalls, 1);
+  });
+
+  testWidgets('WhatsApp verification does not accept a local code', (
+    tester,
+  ) async {
+    final gateway = FakeAuthGateway(otpConfigured: true);
+    await tester.pumpWidget(const SizedBox.shrink());
+    await tester.pumpWidget(FishingApp(authGateway: gateway));
+    await tester.pump(AppConstants.splashDuration);
+    await tester.pumpAndSettle();
+
+    final whatsapp = find.byKey(
+      SocialSignInButton.keyFor(AuthProviderId.whatsapp),
+    );
+    await tester.ensureVisible(whatsapp);
+    await tester.tap(whatsapp);
+    await tester.pumpAndSettle();
+
+    expect(find.text(en.whatsappVerificationTitle), findsOneWidget);
+    expect(find.text(en.verificationCode), findsOneWidget);
+    expect(find.text(en.resendCode), findsOneWidget);
+    expect(gateway.signInCalls, 0);
+
+    await tester.enterText(
+      find.byKey(WhatsAppVerificationScreen.codeKey),
+      '123456',
+    );
+    final verify = find.byKey(WhatsAppVerificationScreen.verifyKey);
+    await tester.ensureVisible(verify);
+    await tester.tap(verify);
+    await tester.pumpAndSettle();
+
+    expect(find.text(en.configurationRequired), findsOneWidget);
+    expect(find.text(en.whatsappVerificationTitle), findsOneWidget);
+    expect(
+      find.byKey(const ValueKey<String>('page-heading-Home')),
+      findsNothing,
+    );
+    expect(gateway.codeCalls, 1);
   });
 }
